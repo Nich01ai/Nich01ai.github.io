@@ -2,14 +2,157 @@
 <html>
 <head>
 <title>Page Title</title>
+</head>
 <body>
 
-<h1>My Future Carrer.</h1>
-<p>Bio: My name is Nicholas Parsells i am a student from gratuating class of 2028 at Stephen Decature high school. i am using the Worcesterk Technical High School to improve my learning abilies and to get into Salisbury University for computer science</p>
-<img src="https://orthodox360.com/wp-content/uploads/2015/03/og.jpg" alt="W3Schools.com" >
-<h1 style="background-color:DodgerBlue;">My Future Carrer</h1>
-<p style="background-color:Tomato;">Lorem ipsum...</p>
+<h1>2.1.5 Grid Project</h1>
+<p>in this unit of robotics using the SDV to notice obsticles in the grid path and be able to print that on the brain of the robot. the robot will have a starting point and a end point. we will then code the robot to go on a certain path to avoid the obsitcles to make it to the end point in the most efficient path possible using nested loops in order to make the most efficient way of coding, for example while row and col are less than six call SDV to more in a certain pattern.
+<br>
+<br>
+2D lists
+2 dimentional list helped us a great amount in this project and learning opportunity. the 2 dimensional list helped us instert a grid into the SDV brain screen. we were able to use the 2 dimensional lists to show the obsticles the start point and lots more.
+<br>
+<br>
+Nested loops:
+Nested loops helped us a great deal in this program. Nested loops help condense the program code and can even make it easier to understand. They can also help organize your code in multiple language. some of the most popular coding languages are Python, Java, Java Script, HTML, C++ these are some of the coding languages that take advantage of these efficient ways to code your program.
+<br>
+<br>
+Pseudo code:
+when you start the program, it starts by initializing both variables col and row to 1. then it sets the grid with start point as 3 obstacles as 2 and end point as 1 and 0s are the open spots. you can also think about this as a parking lot for example all of the obstacles are cars, and the end point is an open parking spot.  then we put a while loop when row is less than 6 it will repeatedly see the column to 1 then we have a nested while loop where it sets the cursor to row and column then it will prink items row and col on grid which basically prints the grid on the brain then it will change the col by 1 then outside of the nested while loop you put the set curser next to row on brain then change the row by one. after all of than jumble you put your SDV moving code that tells it where to go for example broadcast FWD and wait then broadcast RT and wait. to actually make it move you have to when I receive RT print RT on brain then set cursor to next row on brain then spin motor 2 forward for certain degrees to make it go for one square length each motor will have to spin for 211 degrees to make a full block distance.
+<br>
+<br>
+python code:
+vexcode_brain_precision = 0
+vexcode_console_precision = 0
+Grid = [[0 for y in range(5)] for x in range(5)]
+grid_8 = [[0 for y in range(5)] for x in range(5)]
+grid_1 = [[0 for y in range(5)] for x in range(5)]
+message1 = Event()
+RT = Event()
+LT = Event()
+FWD = Event()
+PRINTLIST = Event()
+myVariable = 0
+col = 0
+row = 0
+obsticle = 0
+DEBUG = 0
+DEBUG2 = False
 
-</head>  
+def onevent_PRINTLIST_0():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   col = 1
+   row = 1
+   Grid = [
+       [1, 0, 2, 0, 0],
+       [0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 3]
+   ]
+   while row < 6:
+       col = 1
+       while col < 6:
+           brain.screen.set_cursor(row, col)
+           brain.screen.print(Grid[row - 1][col - 1], precision=6 if vexcode_brain_precision is None else vexcode_brain_precision)
+           col = col + 1
+           wait(5, MSEC)
+       brain.screen.next_row()
+       row = row + 1
+       wait(5, MSEC)
+   FWD.broadcast_and_wait()
+   LT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   RT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   LT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   RT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   LT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   RT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+   LT.broadcast_and_wait()
+   FWD.broadcast_and_wait()
+
+def when_started1():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   PRINTLIST.broadcast_and_wait()
+
+def when_started2():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   pass
+
+def onevent_RT_0():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   if DEBUG2:
+       brain.screen.print("RT")
+       brain.screen.next_row()
+   else:
+       motor_2.spin_for(REVERSE, 500, DEGREES)
+
+def onevent_LT_0():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   if DEBUG2:
+       brain.screen.print("LT")
+       brain.screen.next_row()
+   else:
+       motor_1.spin_for(REVERSE, 211, DEGREES)
+
+def onevent_RT_1():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   pass
+
+def onevent_LT_1():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   if DEBUG2:
+       brain.screen.print("LT")
+       brain.screen.next_row()
+   else:
+       motor_2.spin_for(FORWARD, 211, DEGREES)
+
+def onevent_FWD_0():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   if DEBUG2:
+       brain.screen.print("FWD")
+       brain.screen.next_row()
+   else:
+       motor_1.spin_for(FORWARD, 360, DEGREES)
+
+def onevent_FWD_1():
+   global Grid, grid_8, grid_1, message1, RT, LT, FWD, PRINTLIST, myVariable, col, row, obsticle, DEBUG, DEBUG2, vexcode_brain_precision, vexcode_console_precision
+   if DEBUG2:
+       brain.screen.print("FWD")
+       brain.screen.next_row()
+   else:
+       motor_2.spin_for(FORWARD, 360, DEGREES)
+
+# system event handlers
+PRINTLIST(onevent_PRINTLIST_0)
+RT(onevent_RT_0)
+RT(onevent_RT_1)
+LT(onevent_LT_0)
+LT(onevent_LT_1)
+FWD(onevent_FWD_0)
+FWD(onevent_FWD_1)
+# add 15ms delay to make sure events are registered correctly.
+wait(15, MSEC)
+
+ws2 = Thread( when_started2 )
+when_started1()</p>
+
+
+<nav>
+                <ul>
+                    <li><a href="#">CSE</a></li>
+                    <li><a href="#">CSP</a></li>
+                    <li><a href="#">CSA</a></li>
+                    <li><a href="#">CYBER SCECURITY</a></li>
+                   
+                </ul>
+            </nav>
+			
+
 </body>
 </html>
